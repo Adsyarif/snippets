@@ -13,14 +13,14 @@ export const menuList = [
     group: "General",
     items: [
       {
-        link: "/snippets/new",
-        icon: <FilePlus />,
-        text: "Create",
+        link: "/",
+        icon: <Tv />,
+        text: "All Snippet",
       },
       {
-        link: "/snippets/view",
-        icon: <Tv />,
-        text: "Read",
+        link: "/snippets/new",
+        icon: <FilePlus />,
+        text: "Create Snippet",
       },
       {
         link: "/snippets/update",

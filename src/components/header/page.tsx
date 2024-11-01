@@ -2,7 +2,6 @@
 
 import { BellIcon } from "lucide-react";
 import { CommandDemo } from "../command/page";
-import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
