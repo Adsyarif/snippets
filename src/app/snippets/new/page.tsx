@@ -29,7 +29,7 @@ const SnippetCreatePage = () => {
   };
 
   return (
-    <Card className="w-full h-[550px] rounded-xl">
+    <Card className="w-full h-[650px] rounded-xl">
       <CardHeader>
         <CardTitle>Create Snippet</CardTitle>
         <CardDescription>Create snippet code.</CardDescription>
