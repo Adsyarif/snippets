@@ -71,7 +71,7 @@ const SnippetCreatePage = () => {
             </div>
             <Button
               type="submit"
-              className="rounded p-2 bg-blue-500 text-white hover:bg-gray-200 hover:text-blue-500"
+              className="rounded-lg p-2 bg-blue-500 text-white hover:bg-gray-200 hover:text-blue-500"
             >
               Create
             </Button>
