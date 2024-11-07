@@ -19,3 +19,55 @@ export const deleteSnippet = async (id: number) => {
 
   redirect("/");
 };
+
+export const createSnippet = async (
+  fromState: { message: string; title: string },
+  formData: FormData
+) => {
+  try {
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const code = formData.get("code");
+
+    if (typeof title !== "string" || title.length < 3) {
+      return {
+        title: "Error",
+        message: "Title must be longer.",
+      };
+    }
+    if (typeof code !== "string" || code.length < 10) {
+      return {
+        title: "Error",
+        message: "Code must be longer.",
+      };
+    }
+
+    if (typeof description !== "string" || description.length < 10) {
+      return {
+        title: "Error",
+        message: "Description must be longer.",
+      };
+    }
+
+    await db.snippet.create({
+      data: {
+        title,
+        description,
+        code,
+      },
+    });
+
+    throw new Error("Failed to save to database.");
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return {
+        message: err.message,
+      };
+    } else {
+      return {
+        message: "Something went wrong...",
+      };
+    }
+  }
+  redirect("/");
+};

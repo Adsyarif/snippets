@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,36 +8,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { db } from "@/db";
-import { redirect } from "next/navigation";
+import { createSnippet } from "@/action";
+import { useActionState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const SnippetCreatePage = () => {
-  const createSnippet = async (formData: FormData) => {
-    "use server";
+  const [formState, action] = useActionState(createSnippet, {
+    title: "",
+    message: "",
+  });
 
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-    const code = formData.get("code") as string;
-
-    const snippet = await db.snippet.create({
-      data: {
-        title,
-        description,
-        code,
-      },
-    });
-
-    redirect("/");
-  };
+  const { toast } = useToast();
 
   return (
-    <Card className="w-full h-[650px] rounded-xl">
+    <Card className="w-full h-[680px] rounded-xl">
       <CardHeader>
         <CardTitle>Create Snippet</CardTitle>
         <CardDescription>Create snippet code.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="grid gap-4 h-[400px]" action={createSnippet}>
+        <form className="grid gap-4 h-[400px]" action={action}>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4">
               <label className="w-12" htmlFor="title">
@@ -72,6 +64,19 @@ const SnippetCreatePage = () => {
             <Button
               type="submit"
               className="rounded-lg p-2 bg-blue-500 text-white hover:bg-gray-200 hover:text-blue-500"
+              onClick={() => {
+                if (formState.title === "Error") {
+                  toast({
+                    title: formState.title,
+                    description: formState.message,
+                  });
+                } else {
+                  toast({
+                    title: "Success",
+                    description: "Snippet has been created.",
+                  });
+                }
+              }}
             >
               Create
             </Button>

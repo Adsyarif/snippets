@@ -7,23 +7,11 @@ interface ToastMessage {
 }
 
 interface ToastContextType {
-  toast: ToastMessage | null;
-  setToast: (toast: ToastMessage | null) => void;
+  toastDetail?: ToastMessage | null;
+  setToastDetail: (toast: ToastMessage | null) => void;
 }
 
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
-
-export const ToastProvider = ({ children }: { children: ReactNode }) => {
-  const [toast, setToast] = useState<ToastMessage | null>(null);
-  const value = {
-    toast,
-    setToast,
-  };
-
-  return (
-    <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
-  );
-};
+export const ToastContext = createContext<ToastContextType | any>(undefined);
 
 export const useToastContext = () => {
   const context = useContext(ToastContext);
@@ -31,4 +19,16 @@ export const useToastContext = () => {
     throw new Error("useToastContext must be used within a ToastProvider");
   }
   return context;
+};
+
+export const ToastProvider = ({ children }: { children: ReactNode }) => {
+  const [toastDetail, setToastDetail] = useState<ToastMessage | null>(null);
+  const value = {
+    toastDetail,
+    setToastDetail,
+  };
+
+  return (
+    <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
+  );
 };
