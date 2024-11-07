@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
+import * as action from "@/action";
 
 interface SnippetShowPageProps {
   params: Promise<{
@@ -22,6 +23,8 @@ const SnippetShowPage = async (props: SnippetShowPageProps) => {
     return notFound();
   }
 
+  const deleteSnippetAction = action.deleteSnippet.bind(null, parseInt(id));
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between items-center">
@@ -32,9 +35,11 @@ const SnippetShowPage = async (props: SnippetShowPageProps) => {
               <Pencil /> Edit
             </Button>
           </Link>
-          <Button className="bg-red-500 text-white rounded-2xl hover:bg-gray-300 hover:text-red-500">
-            <Trash2 /> Delete
-          </Button>
+          <form action={deleteSnippetAction}>
+            <Button className="bg-red-500 text-white rounded-2xl hover:bg-gray-300 hover:text-red-500">
+              <Trash2 /> Delete
+            </Button>
+          </form>
         </div>
       </div>
       <p className="text-md">{snippet.description}</p>

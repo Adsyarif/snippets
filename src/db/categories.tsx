@@ -22,16 +22,6 @@ export const menuList = [
         icon: <FilePlus />,
         text: "Create Snippet",
       },
-      {
-        link: "/snippets/update",
-        icon: <RefreshCcwDot />,
-        text: "Update",
-      },
-      {
-        link: "/snippets/delete",
-        icon: <Trash2 />,
-        text: "Delete",
-      },
     ],
   },
   {
