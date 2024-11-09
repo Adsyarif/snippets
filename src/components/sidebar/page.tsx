@@ -1,14 +1,13 @@
 import Link from "next/link";
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
   CommandItem,
   CommandList,
   CommandSeparator,
 } from "../ui/command";
 import UserItem from "../userItem/page";
-import { menuList } from "@/db/categories";
+import { menuList, MenuItem, MenuGroup } from "@/db/categories";
 
 const Sidebar = () => {
   return (
@@ -19,9 +18,9 @@ const Sidebar = () => {
       <div className="grow">
         <Command style={{ overflow: "visible" }}>
           <CommandList style={{ overflow: "visible" }}>
-            {menuList.map((menu: any, menuIndex: number) => (
+            {menuList.map((menu: MenuGroup, menuIndex: number) => (
               <CommandGroup key={menuIndex} heading={menu.group}>
-                {menu.items.map((item: any, itemIndex: number) => (
+                {menu.items.map((item: MenuItem, itemIndex: number) => (
                   <Link href={item.link} key={itemIndex}>
                     <CommandItem className="flex gap-2 hover:bg-gray-600 cursor-pointer">
                       {item.icon}

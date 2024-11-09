@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { db } from "@/db";
 import Link from "next/link";
+import type { Snippet } from "@prisma/client";
 
 const Home = async () => {
   const snippets = await db.snippet.findMany();
-  const renderSnippets = snippets.map((snippet: any) => {
+  const renderSnippets = snippets.map((snippet: Snippet) => {
     return (
       <div
         key={snippet.id}
@@ -24,6 +25,7 @@ const Home = async () => {
       </div>
     );
   });
+
   return (
     <>
       <h1 className="text-2xl mb-8">All Snippet</h1>

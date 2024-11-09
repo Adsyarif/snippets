@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/db";
+import { error } from "console";
 import { redirect } from "next/navigation";
 
 export const editSnippet = async (id: number, code: string) => {
@@ -56,18 +57,19 @@ export const createSnippet = async (
         code,
       },
     });
-
-    throw new Error("Failed to save to database.");
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {
+        title: "Error",
         message: err.message,
       };
     } else {
       return {
-        message: "Something went wrong...",
+        title: "Error",
+        message: "Something went wrong.",
       };
     }
   }
+
   redirect("/");
 };

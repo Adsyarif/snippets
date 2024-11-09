@@ -1,14 +1,18 @@
-import {
-  FilePlus,
-  MessageSquareWarning,
-  RefreshCcwDot,
-  Trash2,
-  Tv,
-  User,
-  Wrench,
-} from "lucide-react";
+import { FilePlus, MessageSquareWarning, Tv, User, Wrench } from "lucide-react";
+import { ReactNode } from "react";
 
-export const menuList = [
+export interface MenuItem {
+  link: string;
+  icon: ReactNode;
+  text: string;
+}
+
+export interface MenuGroup {
+  group: string;
+  items: MenuItem[];
+}
+
+export const menuList: MenuGroup[] = [
   {
     group: "General",
     items: [
